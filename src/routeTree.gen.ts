@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as PackagesIndexRouteImport } from './routes/packages.index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,44 +18,45 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PackagesRoute = PackagesRouteImport.update({
-  id: '/packages',
-  path: '/packages',
+const PackagesIndexRoute = PackagesIndexRouteImport.update({
+  id: '/packages/',
+  path: '/packages/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PackagesSlugRoute = PackagesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => PackagesRoute,
+  id: '/packages/$slug',
+  path: '/packages/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/packages': typeof PackagesRouteWithChildren
   '/packages/$slug': typeof PackagesSlugRoute
+  '/packages/': typeof PackagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/packages': typeof PackagesRouteWithChildren
   '/packages/$slug': typeof PackagesSlugRoute
+  '/packages': typeof PackagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/packages': typeof PackagesRouteWithChildren
   '/packages/$slug': typeof PackagesSlugRoute
+  '/packages/': typeof PackagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/packages' | '/packages/$slug'
+  fullPaths: '/' | '/packages/$slug' | '/packages/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/packages' | '/packages/$slug'
-  id: '__root__' | '/' | '/packages' | '/packages/$slug'
+  to: '/' | '/packages/$slug' | '/packages'
+  id: '__root__' | '/' | '/packages/$slug' | '/packages/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PackagesRoute: typeof PackagesRouteWithChildren
+  PackagesSlugRoute: typeof PackagesSlugRoute
+  PackagesIndexRoute: typeof PackagesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -67,38 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/packages': {
-      id: '/packages'
+    '/packages/': {
+      id: '/packages/'
       path: '/packages'
-      fullPath: '/packages'
-      preLoaderRoute: typeof PackagesRouteImport
+      fullPath: '/packages/'
+      preLoaderRoute: typeof PackagesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/packages/$slug': {
       id: '/packages/$slug'
-      path: '/$slug'
+      path: '/packages/$slug'
       fullPath: '/packages/$slug'
       preLoaderRoute: typeof PackagesSlugRouteImport
-      parentRoute: typeof PackagesRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface PackagesRouteChildren {
-  PackagesSlugRoute: typeof PackagesSlugRoute
-}
-
-const PackagesRouteChildren: PackagesRouteChildren = {
-  PackagesSlugRoute: PackagesSlugRoute,
-}
-
-const PackagesRouteWithChildren = PackagesRoute._addFileChildren(
-  PackagesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PackagesRoute: PackagesRouteWithChildren,
+  PackagesSlugRoute: PackagesSlugRoute,
+  PackagesIndexRoute: PackagesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
