@@ -6,6 +6,7 @@ import {
   getTestimonials,
 } from "@/lib/services/content.functions";
 import { pageMeta } from "@/lib/seo";
+import type { Article, Destination, Package, Testimonial } from "@/types/content";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
@@ -20,7 +21,12 @@ const DESCRIPTION =
   "Intimate sailing journeys and private Phinisi charters through the wild islands, hidden beaches and extraordinary waters of Komodo National Park.";
 
 export const Route = createFileRoute("/")({
-  loader: async () => {
+  loader: async (): Promise<{
+    packages: Package[];
+    destinations: Destination[];
+    articles: Article[];
+    testimonials: Testimonial[];
+  }> => {
     const [packages, destinations, articles, testimonials] = await Promise.all([
       getFeaturedPackages(),
       getDestinations(),
