@@ -83,7 +83,12 @@ const BENEFITS = [
 ];
 
 function HomePage() {
-  const { packages, destinations, articles, testimonials } = Route.useLoaderData();
+  const { packages, destinations, articles, testimonials } = Route.useLoaderData() as {
+    packages: Package[];
+    destinations: Destination[];
+    articles: Article[];
+    testimonials: Testimonial[];
+  };
 
   return (
     <>
