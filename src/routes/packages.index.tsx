@@ -11,7 +11,7 @@ const TITLE = "Sailing Journeys & Packages | Komodo Tropical Cruise";
 const DESCRIPTION =
   "Browse every published Komodo sailing journey — from two day escapes to four day island explorations aboard a traditional Phinisi.";
 
-export const Route = createFileRoute("/packages")({
+export const Route = createFileRoute("/packages/")({
   loader: async (): Promise<Package[]> => getPublishedPackages(),
   head: () => ({
     meta: pageMeta({ title: TITLE, description: DESCRIPTION, url: "/packages" }),
