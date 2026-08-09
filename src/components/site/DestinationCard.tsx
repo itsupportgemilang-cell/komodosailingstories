@@ -9,9 +9,9 @@ export function DestinationCard({
   index,
 }: {
   destination: Destination;
-  className?: string;
-  imageClassName?: string;
-  index?: number;
+  className?: string | undefined;
+  imageClassName?: string | undefined;
+  index?: number | undefined;
 }) {
   return (
     <article className={cn("group", className)}>

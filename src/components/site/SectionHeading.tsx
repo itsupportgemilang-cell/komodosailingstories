@@ -2,11 +2,11 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "./Reveal";
 
 interface SectionHeadingProps {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: React.ReactNode;
-  description?: string;
+  description?: string | undefined;
   align?: "left" | "center";
-  className?: string;
+  className?: string | undefined;
   as?: "h2" | "h1";
 }
 

@@ -10,9 +10,9 @@ export function ArticleCard({
   size = "default",
 }: {
   article: Article;
-  className?: string;
-  imageClassName?: string;
-  size?: "default" | "large";
+  className?: string | undefined;
+  imageClassName?: string | undefined;
+  size?: "default" | "large" | undefined;
 }) {
   return (
     <article className={cn("group flex flex-col", className)}>

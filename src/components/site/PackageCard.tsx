@@ -9,8 +9,8 @@ export function PackageCard({
   imageClassName,
 }: {
   pkg: Package;
-  className?: string;
-  imageClassName?: string;
+  className?: string | undefined;
+  imageClassName?: string | undefined;
 }) {
   const price = pkg.price_label ?? (pkg.price ? `from ${formatIDR(pkg.price)}` : null);
 

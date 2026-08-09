@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 
 interface RevealProps {
   children: ReactNode;
-  className?: string;
-  delay?: number;
+  className?: string | undefined;
+  delay?: number | undefined;
   as?: "div" | "section" | "article" | "li" | "figure";
 }
 
