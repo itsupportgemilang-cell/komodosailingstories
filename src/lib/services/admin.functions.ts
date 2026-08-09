@@ -12,6 +12,8 @@ const TABLES = [
 type AdminTable = (typeof TABLES)[number];
 
 const tableSchema = z.enum(TABLES);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AdminRow = Record<string, any>;
 const ORDER: Record<AdminTable, { column: string; ascending: boolean }> = {
   packages: { column: "created_at", ascending: false },
   destinations: { column: "sort_order", ascending: true },
@@ -25,7 +27,7 @@ export const getAdminProfile = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data } = await context.supabase
       .from("profiles")
-      .select("id, email, full_name, role")
+      .select("id, full_name, role")
       .eq("id", context.userId)
       .maybeSingle();
     return { userId: context.userId, profile: data ?? null, isAdmin: data?.role === "admin" };
@@ -41,7 +43,7 @@ export const adminList = createServerFn({ method: "GET" })
       .select("*")
       .order(order.column, { ascending: order.ascending });
     if (error) throw new Error(error.message);
-    return (rows ?? []) as Record<string, unknown>[];
+    return (rows ?? []) as AdminRow[];
   });
 
 export const adminSave = createServerFn({ method: "POST" })
@@ -142,7 +144,7 @@ export const adminGetSettings = createServerFn({ method: "GET" })
       .limit(1)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    return data as Record<string, unknown> | null;
+    return data as AdminRow | null;
   });
 
 export const adminSaveSettings = createServerFn({ method: "POST" })
