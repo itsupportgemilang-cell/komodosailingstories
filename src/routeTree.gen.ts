@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PrivateCharterRouteImport } from './routes/private-charter'
 import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
@@ -20,6 +23,21 @@ import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateCharterRoute = PrivateCharterRouteImport.update({
+  id: '/private-charter',
+  path: '/private-charter',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
@@ -55,6 +73,9 @@ const PackagesSlugRoute = PackagesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/private-charter': typeof PrivateCharterRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -64,6 +85,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/private-charter': typeof PrivateCharterRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -74,6 +98,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/private-charter': typeof PrivateCharterRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -85,6 +112,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/private-charter'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
@@ -94,6 +124,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/private-charter'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
@@ -103,6 +136,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/contact'
+    | '/private-charter'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
@@ -113,6 +149,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  PrivateCharterRoute: typeof PrivateCharterRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   PackagesSlugRoute: typeof PackagesSlugRoute
@@ -128,6 +167,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/private-charter': {
+      id: '/private-charter'
+      path: '/private-charter'
+      fullPath: '/private-charter'
+      preLoaderRoute: typeof PrivateCharterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/articles/': {
@@ -177,6 +237,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  PrivateCharterRoute: PrivateCharterRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   PackagesSlugRoute: PackagesSlugRoute,
