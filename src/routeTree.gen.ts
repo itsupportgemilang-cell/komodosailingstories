@@ -23,6 +23,9 @@ import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slu
 import { Route as PackagesIndexRouteImport } from './routes/packages.index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminArticlesIndexRouteImport } from './routes/_authenticated/admin.articles.index'
+import { Route as AuthenticatedAdminDestinationsIndexRouteImport } from './routes/_authenticated/admin.destinations.index'
+import { Route as AuthenticatedAdminDestinationsIdRouteImport } from './routes/_authenticated/admin.destinations.$id'
 import { Route as AuthenticatedAdminPackagesIndexRouteImport } from './routes/_authenticated/admin.packages.index'
 import { Route as AuthenticatedAdminPackagesIdRouteImport } from './routes/_authenticated/admin.packages.$id'
 
@@ -95,6 +98,24 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminArticlesIndexRoute =
+  AuthenticatedAdminArticlesIndexRouteImport.update({
+    id: '/articles/',
+    path: '/articles/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDestinationsIndexRoute =
+  AuthenticatedAdminDestinationsIndexRouteImport.update({
+    id: '/destinations/',
+    path: '/destinations/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDestinationsIdRoute =
+  AuthenticatedAdminDestinationsIdRouteImport.update({
+    id: '/destinations/$id',
+    path: '/destinations/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminPackagesIndexRoute =
   AuthenticatedAdminPackagesIndexRouteImport.update({
     id: '/packages/',
@@ -122,7 +143,10 @@ export interface FileRoutesByFullPath {
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
+  '/admin/destinations/': typeof AuthenticatedAdminDestinationsIndexRoute
   '/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -138,7 +162,10 @@ export interface FileRoutesByTo {
   '/destinations': typeof DestinationsIndexRoute
   '/packages': typeof PackagesIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/articles': typeof AuthenticatedAdminArticlesIndexRoute
+  '/admin/destinations': typeof AuthenticatedAdminDestinationsIndexRoute
   '/admin/packages': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesById {
@@ -157,7 +184,10 @@ export interface FileRoutesById {
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/_authenticated/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/_authenticated/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
+  '/_authenticated/admin/destinations/': typeof AuthenticatedAdminDestinationsIndexRoute
   '/_authenticated/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRouteTypes {
@@ -176,7 +206,10 @@ export interface FileRouteTypes {
     | '/destinations/'
     | '/packages/'
     | '/admin/'
+    | '/admin/destinations/$id'
     | '/admin/packages/$id'
+    | '/admin/articles/'
+    | '/admin/destinations/'
     | '/admin/packages/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -192,7 +225,10 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/packages'
     | '/admin'
+    | '/admin/destinations/$id'
     | '/admin/packages/$id'
+    | '/admin/articles'
+    | '/admin/destinations'
     | '/admin/packages'
   id:
     | '__root__'
@@ -210,7 +246,10 @@ export interface FileRouteTypes {
     | '/destinations/'
     | '/packages/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/destinations/$id'
     | '/_authenticated/admin/packages/$id'
+    | '/_authenticated/admin/articles/'
+    | '/_authenticated/admin/destinations/'
     | '/_authenticated/admin/packages/'
   fileRoutesById: FileRoutesById
 }
@@ -329,6 +368,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/articles/': {
+      id: '/_authenticated/admin/articles/'
+      path: '/articles'
+      fullPath: '/admin/articles/'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/destinations/': {
+      id: '/_authenticated/admin/destinations/'
+      path: '/destinations'
+      fullPath: '/admin/destinations/'
+      preLoaderRoute: typeof AuthenticatedAdminDestinationsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/destinations/$id': {
+      id: '/_authenticated/admin/destinations/$id'
+      path: '/destinations/$id'
+      fullPath: '/admin/destinations/$id'
+      preLoaderRoute: typeof AuthenticatedAdminDestinationsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/packages/': {
       id: '/_authenticated/admin/packages/'
       path: '/packages'
@@ -348,13 +408,20 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminDestinationsIdRoute: typeof AuthenticatedAdminDestinationsIdRoute
   AuthenticatedAdminPackagesIdRoute: typeof AuthenticatedAdminPackagesIdRoute
+  AuthenticatedAdminArticlesIndexRoute: typeof AuthenticatedAdminArticlesIndexRoute
+  AuthenticatedAdminDestinationsIndexRoute: typeof AuthenticatedAdminDestinationsIndexRoute
   AuthenticatedAdminPackagesIndexRoute: typeof AuthenticatedAdminPackagesIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminDestinationsIdRoute: AuthenticatedAdminDestinationsIdRoute,
   AuthenticatedAdminPackagesIdRoute: AuthenticatedAdminPackagesIdRoute,
+  AuthenticatedAdminArticlesIndexRoute: AuthenticatedAdminArticlesIndexRoute,
+  AuthenticatedAdminDestinationsIndexRoute:
+    AuthenticatedAdminDestinationsIndexRoute,
   AuthenticatedAdminPackagesIndexRoute: AuthenticatedAdminPackagesIndexRoute,
 }
 
