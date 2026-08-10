@@ -22,6 +22,9 @@ import { Route as DestinationsIndexRouteImport } from './routes/destinations.ind
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 import { Route as PackagesIndexRouteImport } from './routes/packages.index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminPackagesIndexRouteImport } from './routes/_authenticated/admin.packages.index'
+import { Route as AuthenticatedAdminPackagesIdRouteImport } from './routes/_authenticated/admin.packages.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -87,6 +90,23 @@ const PackagesSlugRoute = PackagesSlugRouteImport.update({
   path: '/packages/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminPackagesIndexRoute =
+  AuthenticatedAdminPackagesIndexRouteImport.update({
+    id: '/packages/',
+    path: '/packages/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPackagesIdRoute =
+  AuthenticatedAdminPackagesIdRouteImport.update({
+    id: '/packages/$id',
+    path: '/packages/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,13 +114,16 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -108,13 +131,15 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
-  '/admin': typeof AuthenticatedAdminRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/articles': typeof ArticlesIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/packages': typeof PackagesIndexRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/packages': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,13 +149,16 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/_authenticated/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,6 +175,9 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/admin/'
+    | '/admin/packages/$id'
+    | '/admin/packages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -154,13 +185,15 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/private-charter'
-    | '/admin'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
     | '/articles'
     | '/destinations'
     | '/packages'
+    | '/admin'
+    | '/admin/packages/$id'
+    | '/admin/packages'
   id:
     | '__root__'
     | '/'
@@ -176,6 +209,9 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/_authenticated/admin/'
+    | '/_authenticated/admin/packages/$id'
+    | '/_authenticated/admin/packages/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -286,15 +322,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PackagesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/packages/': {
+      id: '/_authenticated/admin/packages/'
+      path: '/packages'
+      fullPath: '/admin/packages/'
+      preLoaderRoute: typeof AuthenticatedAdminPackagesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/packages/$id': {
+      id: '/_authenticated/admin/packages/$id'
+      path: '/packages/$id'
+      fullPath: '/admin/packages/$id'
+      preLoaderRoute: typeof AuthenticatedAdminPackagesIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminPackagesIdRoute: typeof AuthenticatedAdminPackagesIdRoute
+  AuthenticatedAdminPackagesIndexRoute: typeof AuthenticatedAdminPackagesIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminPackagesIdRoute: AuthenticatedAdminPackagesIdRoute,
+  AuthenticatedAdminPackagesIndexRoute: AuthenticatedAdminPackagesIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
