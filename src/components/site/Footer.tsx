@@ -81,8 +81,8 @@ export function Footer() {
             © {new Date().getFullYear()} {settings?.company_name ?? "Komodo Tropical Cruise"}
           </p>
           <div className="flex gap-6">
-            <Link to="/privacy-policy">Privacy Policy</Link>
-            <Link to="/terms">Terms &amp; Conditions</Link>
+            <Link to="/contact">Privacy Policy</Link>
+            <Link to="/contact">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>
