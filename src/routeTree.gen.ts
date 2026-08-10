@@ -23,7 +23,11 @@ import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slu
 import { Route as PackagesIndexRouteImport } from './routes/packages.index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminInquiriesRouteImport } from './routes/_authenticated/admin.inquiries'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
+import { Route as AuthenticatedAdminTestimonialsRouteImport } from './routes/_authenticated/admin.testimonials'
 import { Route as AuthenticatedAdminArticlesIndexRouteImport } from './routes/_authenticated/admin.articles.index'
+import { Route as AuthenticatedAdminArticlesIdRouteImport } from './routes/_authenticated/admin.articles.$id'
 import { Route as AuthenticatedAdminDestinationsIndexRouteImport } from './routes/_authenticated/admin.destinations.index'
 import { Route as AuthenticatedAdminDestinationsIdRouteImport } from './routes/_authenticated/admin.destinations.$id'
 import { Route as AuthenticatedAdminPackagesIndexRouteImport } from './routes/_authenticated/admin.packages.index'
@@ -98,10 +102,34 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminInquiriesRoute =
+  AuthenticatedAdminInquiriesRouteImport.update({
+    id: '/inquiries',
+    path: '/inquiries',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminTestimonialsRoute =
+  AuthenticatedAdminTestimonialsRouteImport.update({
+    id: '/testimonials',
+    path: '/testimonials',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminArticlesIndexRoute =
   AuthenticatedAdminArticlesIndexRouteImport.update({
     id: '/articles/',
     path: '/articles/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminArticlesIdRoute =
+  AuthenticatedAdminArticlesIdRouteImport.update({
+    id: '/articles/$id',
+    path: '/articles/$id',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
 const AuthenticatedAdminDestinationsIndexRoute =
@@ -142,7 +170,11 @@ export interface FileRoutesByFullPath {
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
   '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
   '/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
@@ -161,7 +193,11 @@ export interface FileRoutesByTo {
   '/articles': typeof ArticlesIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/packages': typeof PackagesIndexRoute
+  '/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
   '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesIndexRoute
@@ -183,7 +219,11 @@ export interface FileRoutesById {
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/_authenticated/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
   '/_authenticated/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
   '/_authenticated/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
   '/_authenticated/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
@@ -205,7 +245,11 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/admin/inquiries'
+    | '/admin/settings'
+    | '/admin/testimonials'
     | '/admin/'
+    | '/admin/articles/$id'
     | '/admin/destinations/$id'
     | '/admin/packages/$id'
     | '/admin/articles/'
@@ -224,7 +268,11 @@ export interface FileRouteTypes {
     | '/articles'
     | '/destinations'
     | '/packages'
+    | '/admin/inquiries'
+    | '/admin/settings'
+    | '/admin/testimonials'
     | '/admin'
+    | '/admin/articles/$id'
     | '/admin/destinations/$id'
     | '/admin/packages/$id'
     | '/admin/articles'
@@ -245,7 +293,11 @@ export interface FileRouteTypes {
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/_authenticated/admin/inquiries'
+    | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/testimonials'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/articles/$id'
     | '/_authenticated/admin/destinations/$id'
     | '/_authenticated/admin/packages/$id'
     | '/_authenticated/admin/articles/'
@@ -368,11 +420,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/inquiries': {
+      id: '/_authenticated/admin/inquiries'
+      path: '/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AuthenticatedAdminInquiriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/testimonials': {
+      id: '/_authenticated/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AuthenticatedAdminTestimonialsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/articles/': {
       id: '/_authenticated/admin/articles/'
       path: '/articles'
       fullPath: '/admin/articles/'
       preLoaderRoute: typeof AuthenticatedAdminArticlesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/articles/$id': {
+      id: '/_authenticated/admin/articles/$id'
+      path: '/articles/$id'
+      fullPath: '/admin/articles/$id'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesIdRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/destinations/': {
@@ -407,7 +487,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminInquiriesRoute: typeof AuthenticatedAdminInquiriesRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminTestimonialsRoute: typeof AuthenticatedAdminTestimonialsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminArticlesIdRoute: typeof AuthenticatedAdminArticlesIdRoute
   AuthenticatedAdminDestinationsIdRoute: typeof AuthenticatedAdminDestinationsIdRoute
   AuthenticatedAdminPackagesIdRoute: typeof AuthenticatedAdminPackagesIdRoute
   AuthenticatedAdminArticlesIndexRoute: typeof AuthenticatedAdminArticlesIndexRoute
@@ -416,7 +500,11 @@ interface AuthenticatedAdminRouteChildren {
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminInquiriesRoute: AuthenticatedAdminInquiriesRoute,
+  AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+  AuthenticatedAdminTestimonialsRoute: AuthenticatedAdminTestimonialsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminArticlesIdRoute: AuthenticatedAdminArticlesIdRoute,
   AuthenticatedAdminDestinationsIdRoute: AuthenticatedAdminDestinationsIdRoute,
   AuthenticatedAdminPackagesIdRoute: AuthenticatedAdminPackagesIdRoute,
   AuthenticatedAdminArticlesIndexRoute: AuthenticatedAdminArticlesIndexRoute,
