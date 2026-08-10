@@ -10,24 +10,46 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivateCharterRouteImport } from './routes/private-charter'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 import { Route as DestinationsIndexRouteImport } from './routes/destinations.index'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 import { Route as PackagesIndexRouteImport } from './routes/packages.index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminInquiriesRouteImport } from './routes/_authenticated/admin.inquiries'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
+import { Route as AuthenticatedAdminTestimonialsRouteImport } from './routes/_authenticated/admin.testimonials'
+import { Route as AuthenticatedAdminArticlesIndexRouteImport } from './routes/_authenticated/admin.articles.index'
+import { Route as AuthenticatedAdminArticlesIdRouteImport } from './routes/_authenticated/admin.articles.$id'
+import { Route as AuthenticatedAdminDestinationsIndexRouteImport } from './routes/_authenticated/admin.destinations.index'
+import { Route as AuthenticatedAdminDestinationsIdRouteImport } from './routes/_authenticated/admin.destinations.$id'
+import { Route as AuthenticatedAdminPackagesIndexRouteImport } from './routes/_authenticated/admin.packages.index'
+import { Route as AuthenticatedAdminPackagesIdRouteImport } from './routes/_authenticated/admin.packages.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -39,6 +61,11 @@ const PrivateCharterRoute = PrivateCharterRouteImport.update({
   id: '/private-charter',
   path: '/private-charter',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
   id: '/articles/',
@@ -70,22 +97,94 @@ const PackagesSlugRoute = PackagesSlugRouteImport.update({
   path: '/packages/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminInquiriesRoute =
+  AuthenticatedAdminInquiriesRouteImport.update({
+    id: '/inquiries',
+    path: '/inquiries',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminTestimonialsRoute =
+  AuthenticatedAdminTestimonialsRouteImport.update({
+    id: '/testimonials',
+    path: '/testimonials',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminArticlesIndexRoute =
+  AuthenticatedAdminArticlesIndexRouteImport.update({
+    id: '/articles/',
+    path: '/articles/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminArticlesIdRoute =
+  AuthenticatedAdminArticlesIdRouteImport.update({
+    id: '/articles/$id',
+    path: '/articles/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDestinationsIndexRoute =
+  AuthenticatedAdminDestinationsIndexRouteImport.update({
+    id: '/destinations/',
+    path: '/destinations/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDestinationsIdRoute =
+  AuthenticatedAdminDestinationsIdRouteImport.update({
+    id: '/destinations/$id',
+    path: '/destinations/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPackagesIndexRoute =
+  AuthenticatedAdminPackagesIndexRouteImport.update({
+    id: '/packages/',
+    path: '/packages/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPackagesIdRoute =
+  AuthenticatedAdminPackagesIdRouteImport.update({
+    id: '/packages/$id',
+    path: '/packages/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
+  '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
+  '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
+  '/admin/destinations/': typeof AuthenticatedAdminDestinationsIndexRoute
+  '/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
   '/articles/$slug': typeof ArticlesSlugRoute
@@ -94,37 +193,73 @@ export interface FileRoutesByTo {
   '/articles': typeof ArticlesIndexRoute
   '/destinations': typeof DestinationsIndexRoute
   '/packages': typeof PackagesIndexRoute
+  '/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
+  '/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
+  '/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/admin/articles': typeof AuthenticatedAdminArticlesIndexRoute
+  '/admin/destinations': typeof AuthenticatedAdminDestinationsIndexRoute
+  '/admin/packages': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/articles/': typeof ArticlesIndexRoute
   '/destinations/': typeof DestinationsIndexRoute
   '/packages/': typeof PackagesIndexRoute
+  '/_authenticated/admin/inquiries': typeof AuthenticatedAdminInquiriesRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/articles/$id': typeof AuthenticatedAdminArticlesIdRoute
+  '/_authenticated/admin/destinations/$id': typeof AuthenticatedAdminDestinationsIdRoute
+  '/_authenticated/admin/packages/$id': typeof AuthenticatedAdminPackagesIdRoute
+  '/_authenticated/admin/articles/': typeof AuthenticatedAdminArticlesIndexRoute
+  '/_authenticated/admin/destinations/': typeof AuthenticatedAdminDestinationsIndexRoute
+  '/_authenticated/admin/packages/': typeof AuthenticatedAdminPackagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/private-charter'
+    | '/admin'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/admin/inquiries'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin/'
+    | '/admin/articles/$id'
+    | '/admin/destinations/$id'
+    | '/admin/packages/$id'
+    | '/admin/articles/'
+    | '/admin/destinations/'
+    | '/admin/packages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/private-charter'
     | '/articles/$slug'
@@ -133,23 +268,48 @@ export interface FileRouteTypes {
     | '/articles'
     | '/destinations'
     | '/packages'
+    | '/admin/inquiries'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin'
+    | '/admin/articles/$id'
+    | '/admin/destinations/$id'
+    | '/admin/packages/$id'
+    | '/admin/articles'
+    | '/admin/destinations'
+    | '/admin/packages'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/private-charter'
+    | '/_authenticated/admin'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
     | '/articles/'
     | '/destinations/'
     | '/packages/'
+    | '/_authenticated/admin/inquiries'
+    | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/testimonials'
+    | '/_authenticated/admin/'
+    | '/_authenticated/admin/articles/$id'
+    | '/_authenticated/admin/destinations/$id'
+    | '/_authenticated/admin/packages/$id'
+    | '/_authenticated/admin/articles/'
+    | '/_authenticated/admin/destinations/'
+    | '/_authenticated/admin/packages/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   PrivateCharterRoute: typeof PrivateCharterRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
@@ -169,11 +329,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -189,6 +363,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/private-charter'
       preLoaderRoute: typeof PrivateCharterRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/articles/': {
       id: '/articles/'
@@ -232,12 +413,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PackagesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/inquiries': {
+      id: '/_authenticated/admin/inquiries'
+      path: '/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AuthenticatedAdminInquiriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/testimonials': {
+      id: '/_authenticated/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AuthenticatedAdminTestimonialsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/articles/': {
+      id: '/_authenticated/admin/articles/'
+      path: '/articles'
+      fullPath: '/admin/articles/'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/articles/$id': {
+      id: '/_authenticated/admin/articles/$id'
+      path: '/articles/$id'
+      fullPath: '/admin/articles/$id'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/destinations/': {
+      id: '/_authenticated/admin/destinations/'
+      path: '/destinations'
+      fullPath: '/admin/destinations/'
+      preLoaderRoute: typeof AuthenticatedAdminDestinationsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/destinations/$id': {
+      id: '/_authenticated/admin/destinations/$id'
+      path: '/destinations/$id'
+      fullPath: '/admin/destinations/$id'
+      preLoaderRoute: typeof AuthenticatedAdminDestinationsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/packages/': {
+      id: '/_authenticated/admin/packages/'
+      path: '/packages'
+      fullPath: '/admin/packages/'
+      preLoaderRoute: typeof AuthenticatedAdminPackagesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/packages/$id': {
+      id: '/_authenticated/admin/packages/$id'
+      path: '/packages/$id'
+      fullPath: '/admin/packages/$id'
+      preLoaderRoute: typeof AuthenticatedAdminPackagesIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminInquiriesRoute: typeof AuthenticatedAdminInquiriesRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminTestimonialsRoute: typeof AuthenticatedAdminTestimonialsRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminArticlesIdRoute: typeof AuthenticatedAdminArticlesIdRoute
+  AuthenticatedAdminDestinationsIdRoute: typeof AuthenticatedAdminDestinationsIdRoute
+  AuthenticatedAdminPackagesIdRoute: typeof AuthenticatedAdminPackagesIdRoute
+  AuthenticatedAdminArticlesIndexRoute: typeof AuthenticatedAdminArticlesIndexRoute
+  AuthenticatedAdminDestinationsIndexRoute: typeof AuthenticatedAdminDestinationsIndexRoute
+  AuthenticatedAdminPackagesIndexRoute: typeof AuthenticatedAdminPackagesIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminInquiriesRoute: AuthenticatedAdminInquiriesRoute,
+  AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+  AuthenticatedAdminTestimonialsRoute: AuthenticatedAdminTestimonialsRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminArticlesIdRoute: AuthenticatedAdminArticlesIdRoute,
+  AuthenticatedAdminDestinationsIdRoute: AuthenticatedAdminDestinationsIdRoute,
+  AuthenticatedAdminPackagesIdRoute: AuthenticatedAdminPackagesIdRoute,
+  AuthenticatedAdminArticlesIndexRoute: AuthenticatedAdminArticlesIndexRoute,
+  AuthenticatedAdminDestinationsIndexRoute:
+    AuthenticatedAdminDestinationsIndexRoute,
+  AuthenticatedAdminPackagesIndexRoute: AuthenticatedAdminPackagesIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   PrivateCharterRoute: PrivateCharterRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
@@ -250,13 +544,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
