@@ -101,6 +101,19 @@ export const adminStats = createServerFn({ method: "GET" })
         return [table, count ?? 0] as const;
       }),
     );
+    const published = await Promise.all(
+      (["packages", "destinations", "articles", "testimonials"] as const).map(async (table) => {
+        const { count } = await context.supabase
+          .from(table)
+          .select("id", { count: "exact", head: true })
+          .eq("is_published", true);
+        return [table, count ?? 0] as const;
+      }),
+    );
+    const { count: newInquiries } = await context.supabase
+      .from("booking_inquiries")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "new");
     const { data: recent } = await context.supabase
       .from("booking_inquiries")
       .select("id, name, email, package_slug, status, created_at")
@@ -108,6 +121,11 @@ export const adminStats = createServerFn({ method: "GET" })
       .limit(5);
     return {
       counts: Object.fromEntries(counts) as Record<AdminTable, number>,
+      published: Object.fromEntries(published) as Record<
+        "packages" | "destinations" | "articles" | "testimonials",
+        number
+      >,
+      newInquiries: newInquiries ?? 0,
       recentInquiries: (recent ?? []) as Array<{
         id: string;
         name: string;
@@ -123,7 +141,10 @@ export const adminUpdateInquiryStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) =>
     z
-      .object({ id: z.string().uuid(), status: z.enum(["new", "contacted", "closed"]) })
+      .object({
+        id: z.string().uuid(),
+        status: z.enum(["new", "contacted", "confirmed", "cancelled"]),
+      })
       .parse(data),
   )
   .handler(async ({ data, context }) => {
