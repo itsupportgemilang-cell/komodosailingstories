@@ -22,7 +22,7 @@ export function Field({
   children,
 }: {
   label: string;
-  hint?: string;
+  hint?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -45,8 +45,8 @@ export function TextField({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
-  hint?: string;
+  placeholder?: string | undefined;
+  hint?: string | undefined;
   type?: string;
 }) {
   return (
@@ -72,7 +72,7 @@ export function TextAreaField({
   value: string;
   onChange: (value: string) => void;
   rows?: number;
-  hint?: string;
+  hint?: string | undefined;
 }) {
   return (
     <Field label={label} hint={hint}>
