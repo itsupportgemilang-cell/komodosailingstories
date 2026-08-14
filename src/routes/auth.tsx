@@ -34,6 +34,7 @@ function AuthPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [resetting, setResetting] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -68,6 +69,27 @@ function AuthPage() {
       setNotice(error instanceof Error ? error.message : "Something went wrong.");
     } finally {
       setPending(false);
+    }
+  }
+
+  async function handleForgotPassword() {
+    if (!email) {
+      setNotice("Enter your email first, then tap “Forgot password?”.");
+      return;
+    }
+    setResetting(true);
+    setNotice(null);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) throw error;
+      toast.success("Reset link sent");
+      setNotice("We sent a password reset link to your email. Open it to set a new password.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Something went wrong.");
+    } finally {
+      setResetting(false);
     }
   }
 
@@ -114,6 +136,16 @@ function AuthPage() {
           <Button type="submit" className="w-full" disabled={pending}>
             {pending ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
           </Button>
+          {mode === "signin" ? (
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              disabled={resetting}
+              className="w-full text-center text-sm text-muted-foreground underline-offset-4 hover:underline disabled:opacity-60"
+            >
+              {resetting ? "Sending reset link…" : "Forgot password?"}
+            </button>
+          ) : null}
         </form>
 
         <div className="mt-6 flex items-center justify-between text-sm">
