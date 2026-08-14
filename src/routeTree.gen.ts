@@ -15,6 +15,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivateCharterRouteImport } from './routes/private-charter'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ArticlesIndexRouteImport } from './routes/articles.index'
 import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
@@ -60,6 +61,11 @@ const ContactRoute = ContactRouteImport.update({
 const PrivateCharterRoute = PrivateCharterRouteImport.update({
   id: '/private-charter',
   path: '/private-charter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -163,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -212,6 +220,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/private-charter': typeof PrivateCharterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/articles/$slug': typeof ArticlesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
@@ -238,6 +247,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/private-charter'
+    | '/reset-password'
     | '/admin'
     | '/articles/$slug'
     | '/destinations/$slug'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/private-charter'
+    | '/reset-password'
     | '/articles/$slug'
     | '/destinations/$slug'
     | '/packages/$slug'
@@ -286,6 +297,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/private-charter'
+    | '/reset-password'
     | '/_authenticated/admin'
     | '/articles/$slug'
     | '/destinations/$slug'
@@ -312,6 +324,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   PrivateCharterRoute: typeof PrivateCharterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ArticlesSlugRoute: typeof ArticlesSlugRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   PackagesSlugRoute: typeof PackagesSlugRoute
@@ -362,6 +375,13 @@ declare module '@tanstack/react-router' {
       path: '/private-charter'
       fullPath: '/private-charter'
       preLoaderRoute: typeof PrivateCharterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -534,6 +554,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   PrivateCharterRoute: PrivateCharterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ArticlesSlugRoute: ArticlesSlugRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   PackagesSlugRoute: PackagesSlugRoute,
