@@ -21,16 +21,12 @@ export function SectionHeading({
   const Tag = as;
   return (
     <Reveal
-      className={cn(
-        "max-w-2xl",
-        align === "center" && "mx-auto text-center max-w-3xl",
-        className,
-      )}
+      className={cn("max-w-2xl", align === "center" && "mx-auto max-w-3xl text-center", className)}
     >
-      {eyebrow ? <p className="eyebrow text-accent mb-5">{eyebrow}</p> : null}
+      {eyebrow ? <span className="pill mb-6 text-accent">{eyebrow}</span> : null}
       <Tag className="display text-[clamp(2rem,4.2vw,3.5rem)]">{title}</Tag>
       {description ? (
-        <p className="mt-6 text-muted-foreground text-base leading-relaxed max-w-xl">
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
           {description}
         </p>
       ) : null}
