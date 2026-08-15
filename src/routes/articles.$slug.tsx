@@ -76,7 +76,8 @@ function ArticleDetail() {
 
   return (
     <>
-      <section className="relative h-[62vh] min-h-[380px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[62vh] min-h-[380px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src={article.featured_image ?? "/images/padar.jpg"}
           alt={article.title}
@@ -93,11 +94,12 @@ function ArticleDetail() {
             {article.author ? ` · ${article.author}` : ""}
           </p>
         </div>
+        </div>
       </section>
 
       <article className="mx-auto max-w-2xl px-6 py-20 lg:py-28">
         {article.excerpt ? (
-          <p className="font-serif text-[1.6rem] leading-[1.5]">{article.excerpt}</p>
+          <p className="text-[1.6rem] leading-[1.5] font-light">{article.excerpt}</p>
         ) : null}
         <div
           className="prose-editorial mt-10"

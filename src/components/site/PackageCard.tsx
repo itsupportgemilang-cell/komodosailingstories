@@ -18,18 +18,18 @@ export function PackageCard({
   return (
     <article
       className={cn(
-        "card-surface group flex flex-col overflow-hidden hover:-translate-y-1 hover:shadow-[0_28px_60px_-38px_rgba(0,48,80,0.55)]",
+        "float-card group flex flex-col overflow-hidden",
         className,
       )}
     >
       <Link
         to="/packages/$slug"
         params={{ slug: pkg.slug }}
-        className="block overflow-hidden rounded-[1.5rem] p-2 pb-0"
+        className="block overflow-hidden rounded-[2rem] p-2 pb-0"
         tabIndex={-1}
         aria-hidden="true"
       >
-        <div className="overflow-hidden rounded-[1.1rem] bg-secondary">
+        <div className="overflow-hidden relative rounded-[1.6rem] bg-secondary">
           <img
             src={pkg.featured_image ?? "/images/hero-phinisi.jpg"}
             alt=""
@@ -43,12 +43,12 @@ export function PackageCard({
       </Link>
 
       <div className="flex flex-1 flex-col p-6">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
-          {pkg.duration ? <span>{pkg.duration}</span> : null}
-          {pkg.location ? <span className="opacity-60">{pkg.location}</span> : null}
+        <div className="flex flex-wrap items-center gap-2">
+          {pkg.duration ? <span className="pill !py-1 !text-[0.66rem] text-accent">{pkg.duration}</span> : null}
+          {pkg.location ? <span className="pill !py-1 !text-[0.66rem] text-muted-foreground">{pkg.location}</span> : null}
         </div>
 
-        <h3 className="mt-2 text-[1.25rem] leading-snug font-semibold">
+        <h3 className="mt-4 text-[1.25rem] leading-snug font-medium">
           <Link
             to="/packages/$slug"
             params={{ slug: pkg.slug }}
@@ -70,7 +70,7 @@ export function PackageCard({
             to="/packages/$slug"
             params={{ slug: pkg.slug }}
             aria-label={`Explore ${pkg.title}`}
-            className="grid size-10 shrink-0 place-items-center rounded-full border border-border text-accent transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
+            className="circle-btn size-11 shrink-0 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
           >
             <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>

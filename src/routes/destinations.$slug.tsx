@@ -74,7 +74,8 @@ function DestinationDetail() {
 
   return (
     <>
-      <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[70vh] min-h-[420px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src={destination.featured_image ?? "/images/padar.jpg"}
           alt={destination.name}
@@ -87,12 +88,13 @@ function DestinationDetail() {
             {destination.name}
           </h1>
         </div>
+        </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-24 lg:py-32">
         <Reveal>
           {destination.short_description ? (
-            <p className="font-serif text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45]">
+            <p className="text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45] font-light">
               {destination.short_description}
             </p>
           ) : null}

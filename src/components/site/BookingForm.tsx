@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { createBookingInquiry } from "@/lib/services/content.functions";
 
 const FIELD =
-  "w-full border-b border-border bg-transparent py-3 text-sm outline-none transition-colors focus:border-accent";
+  "w-full rounded-[1.25rem] border border-border bg-card px-5 py-3.5 text-sm outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20";
 const LABEL = "eyebrow text-muted-foreground";
 
 export function BookingForm({ packageSlug }: { packageSlug?: string }) {
@@ -31,7 +31,7 @@ export function BookingForm({ packageSlug }: { packageSlug?: string }) {
   if (mutation.isSuccess) {
     return (
       <div className="border border-border p-10 text-center" role="status">
-        <p className="font-serif text-3xl">Thank you.</p>
+        <p className="text-3xl font-medium">Thank you.</p>
         <p className="mt-4 text-sm text-muted-foreground">
           Your enquiry has reached our team in Labuan Bajo. We usually reply within one working
           day.
@@ -108,7 +108,7 @@ export function BookingForm({ packageSlug }: { packageSlug?: string }) {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="border border-foreground px-10 py-4 text-[0.7rem] tracking-[0.2em] uppercase transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
+          className="btn-primary disabled:opacity-50"
         >
           {mutation.isPending ? "Sending…" : "Send Enquiry"}
         </button>

@@ -101,7 +101,7 @@ function JournalPage() {
               <button
                 type="button"
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="mt-16 border border-foreground px-10 py-4 text-[0.7rem] tracking-[0.2em] uppercase transition-colors hover:bg-foreground hover:text-background"
+                className="btn-outline mt-16"
               >
                 Load More
               </button>

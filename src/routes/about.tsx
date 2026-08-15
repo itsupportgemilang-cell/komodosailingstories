@@ -32,7 +32,7 @@ function AboutPage() {
           <img
             src="/images/charter-sunset.jpg"
             alt="The Phinisi at anchor in Komodo National Park"
-            className="aspect-[21/9] w-full object-cover"
+            className="aspect-[21/9] w-full rounded-[2.5rem] object-cover"
             loading="lazy"
           />
         </Reveal>
@@ -43,7 +43,7 @@ function AboutPage() {
           <p className="eyebrow text-accent">Our Story</p>
         </Reveal>
         <Reveal className="lg:col-span-7" delay={80}>
-          <p className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.4]">
+          <p className="text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.4] font-light">
             Komodo Tropical Cruise began with one restored Phinisi and a stubborn belief that these
             islands are best met slowly.
           </p>
@@ -66,7 +66,7 @@ function AboutPage() {
               ["11", "Crew aboard"],
             ].map(([n, l]) => (
               <div key={l} className="border-t border-border pt-5">
-                <p className="font-serif text-4xl">{n}</p>
+                <p className="text-4xl font-medium text-accent">{n}</p>
                 <p className="mt-2 text-[0.7rem] tracking-[0.18em] text-muted-foreground uppercase">
                   {l}
                 </p>

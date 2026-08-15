@@ -103,7 +103,8 @@ function PackageDetail() {
 
   return (
     <>
-      <section className="relative h-[78vh] min-h-[460px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[78vh] min-h-[460px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src={pkg.featured_image ?? "/images/hero-phinisi.jpg"}
           alt={pkg.title}
@@ -120,11 +121,12 @@ function PackageDetail() {
             <span>{price}</span>
             <a
               href="#enquire"
-              className="border border-[var(--sand)]/60 px-7 py-3 transition-colors hover:bg-[var(--sand)] hover:text-foreground"
+              className="btn-glass !py-3 !text-[0.72rem]"
             >
               Book This Journey
             </a>
           </div>
+        </div>
         </div>
       </section>
 
@@ -132,7 +134,7 @@ function PackageDetail() {
         <div className="lg:col-span-8">
           {pkg.description ? (
             <Reveal>
-              <p className="font-serif text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45]">
+              <p className="text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45] font-light">
                 {pkg.short_description}
               </p>
               <p className="mt-8 text-sm leading-[1.95] text-muted-foreground">{pkg.description}</p>
@@ -143,7 +145,7 @@ function PackageDetail() {
             <Section title="Highlights">
               <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
                 {pkg.highlights.map((item) => (
-                  <li key={item} className="border-b border-border pb-4 font-serif text-xl">
+                  <li key={item} className="rounded-full border border-border bg-card px-6 py-4 text-lg font-medium">
                     {item}
                   </li>
                 ))}
@@ -161,7 +163,7 @@ function PackageDetail() {
             <Section title="What's Included">
               <div className="grid gap-12 sm:grid-cols-2">
                 <div>
-                  <h3 className="mb-4 font-serif text-xl">Included</h3>
+                  <h3 className="mb-4 text-lg font-semibold">Included</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {pkg.included.map((item) => (
                       <li key={item}>— {item}</li>
@@ -169,7 +171,7 @@ function PackageDetail() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-4 font-serif text-xl">Not included</h3>
+                  <h3 className="mb-4 text-lg font-semibold">Not included</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {pkg.excluded.map((item) => (
                       <li key={item}>— {item}</li>
@@ -196,7 +198,7 @@ function PackageDetail() {
         <aside className="lg:col-span-4">
           <div className="sticky top-28 border border-border p-8">
             <p className="eyebrow text-muted-foreground">Starting from</p>
-            <p className="mt-3 font-serif text-3xl">{price}</p>
+            <p className="mt-3 text-3xl font-medium">{price}</p>
             <dl className="mt-8 space-y-3 text-sm text-muted-foreground">
               {pkg.duration ? (
                 <div className="flex justify-between gap-4">
@@ -213,7 +215,7 @@ function PackageDetail() {
             </dl>
             <a
               href="#enquire"
-              className="mt-8 block border border-foreground px-6 py-4 text-center text-[0.7rem] tracking-[0.2em] uppercase transition-colors hover:bg-foreground hover:text-background"
+              className="btn-primary mt-8 w-full"
             >
               Enquire Now
             </a>
