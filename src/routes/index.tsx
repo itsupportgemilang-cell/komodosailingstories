@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 import {
   getFeaturedPackages,
   getDestinations,
@@ -93,45 +94,50 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative flex min-h-[100svh] items-end overflow-hidden">
-        <img
-          src="/images/hero-phinisi.jpg"
-          alt="A traditional Phinisi sailing boat anchored among the islands of Komodo National Park"
-          width={1920}
-          height={1280}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/35" />
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 pb-24 lg:px-10 lg:pb-32">
-          <p className="eyebrow text-[var(--sand)]/80">Komodo National Park · Indonesia</p>
-          <h1 className="display mt-8 max-w-4xl text-[clamp(2.6rem,6.5vw,5.5rem)] text-[var(--sand)]">
-            Discover Komodo,
-            <br />
-            Beyond the Ordinary.
-          </h1>
-          <p className="mt-8 max-w-md text-sm leading-relaxed text-[var(--sand)]/80">
-            An intimate sailing experience through wild islands, hidden beaches, and extraordinary
-            waters.
-          </p>
-          <div className="mt-12 flex flex-wrap gap-4">
-            <Link
-              to="/packages"
-              className="bg-[var(--sand)] px-9 py-4 text-[0.7rem] tracking-[0.2em] text-foreground uppercase transition-opacity hover:opacity-85"
-            >
-              Explore Journeys
-            </Link>
-            <Link
-              to="/private-charter"
-              className="border border-[var(--sand)]/60 px-9 py-4 text-[0.7rem] tracking-[0.2em] text-[var(--sand)] uppercase transition-colors hover:bg-[var(--sand)] hover:text-foreground"
-            >
-              Private Charter
-            </Link>
+      <section className="px-3 pt-24 sm:px-5 lg:pt-28">
+        <div className="relative mx-auto max-w-[1600px] overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] lg:rounded-[3rem]">
+          <img
+            src="/images/hero-phinisi.jpg"
+            alt="A traditional Phinisi sailing boat anchored among the islands of Komodo National Park"
+            width={1920}
+            height={1280}
+            className="hero-img-in h-[86svh] min-h-[560px] w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#003050]/85 via-[#003050]/25 to-[#003050]/35" />
+
+          <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 lg:p-14">
+            <div className="hero-in max-w-4xl">
+              <span className="pill-glass">Komodo National Park · Indonesia</span>
+              <h1 className="display mt-7 text-[clamp(2.4rem,6.2vw,5.2rem)] text-white">
+                Discover Komodo,
+                <br />
+                Beyond the Ordinary.
+              </h1>
+              <p className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-white/85">
+                An intimate sailing experience through wild islands, hidden beaches, and
+                extraordinary waters.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link to="/packages" className="btn-primary">
+                  Explore Journeys
+                  <ArrowUpRight className="size-4" />
+                </Link>
+                <Link to="/private-charter" className="btn-glass">
+                  Private Charter
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-in absolute top-24 right-6 hidden w-[230px] rounded-[1.75rem] border border-white/25 bg-white/12 p-5 text-white backdrop-blur-xl lg:block">
+            <p className="text-[0.7rem] font-semibold tracking-[0.16em] uppercase opacity-80">
+              Small groups
+            </p>
+            <p className="mt-2 text-sm leading-relaxed opacity-85">
+              Traditional Phinisi boats, sailed with a Labuan Bajo crew.
+            </p>
           </div>
         </div>
-        <div
-          aria-hidden="true"
-          className="absolute bottom-8 left-1/2 hidden h-14 w-px -translate-x-1/2 bg-[var(--sand)]/40 lg:block"
-        />
       </section>
 
       {/* EDITORIAL INTRO */}
@@ -142,13 +148,13 @@ function HomePage() {
               src="/images/padar.jpg"
               alt="Aerial view of Padar Island's curved bays"
               loading="lazy"
-              className="aspect-[4/5] w-full object-cover sm:aspect-[5/4]"
+              className="aspect-[4/5] w-full rounded-[2.5rem] object-cover sm:aspect-[5/4]"
             />
             <img
               src="/images/pink-beach.jpg"
               alt="Pink sand meeting clear shallow water"
               loading="lazy"
-              className="absolute -bottom-10 -right-6 hidden w-[38%] object-cover shadow-2xl sm:block lg:-right-16"
+              className="absolute -right-6 -bottom-12 hidden aspect-square w-[38%] rounded-[2rem] border-4 border-background object-cover shadow-[0_30px_70px_-45px_rgba(0,48,80,0.9)] sm:block lg:-right-16"
             />
           </Reveal>
           <div className="lg:col-span-5 lg:pl-6">
@@ -182,7 +188,7 @@ function HomePage() {
       </section>
 
       {/* FEATURED PACKAGES */}
-      <section className="bg-[var(--sand-deep)]">
+      <section className="mx-auto max-w-[1600px] rounded-[2.5rem] bg-[var(--sand-deep)] sm:mx-5 lg:rounded-[3rem]">
         <div className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <SectionHeading
@@ -193,7 +199,7 @@ function HomePage() {
             <Reveal>
               <Link
                 to="/packages"
-                className="text-[0.7rem] tracking-[0.2em] uppercase underline-offset-8 hover:underline"
+                className="btn-outline !py-3 !text-[0.8rem]"
               >
                 View All Journeys
               </Link>
@@ -245,7 +251,7 @@ function HomePage() {
         <Reveal className="mt-16">
           <Link
             to="/destinations"
-            className="text-[0.7rem] tracking-[0.2em] uppercase underline-offset-8 hover:underline"
+            className="btn-outline !py-3 !text-[0.8rem]"
           >
             All Destinations
           </Link>
@@ -253,7 +259,7 @@ function HomePage() {
       </section>
 
       {/* FULL WIDTH STORY */}
-      <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
+      <section className="relative mx-auto h-[70vh] min-h-[420px] max-w-[1600px] overflow-hidden rounded-[2.5rem] px-0 sm:mx-5 lg:rounded-[3rem]">
         <img
           src="/images/charter-sunset.jpg"
           alt="A Phinisi boat silhouetted against a Komodo sunset"
@@ -286,14 +292,14 @@ function HomePage() {
             </Reveal>
           </div>
           <div className="lg:col-span-7">
-            <ul className="border-t border-border">
+            <ul className="flex flex-wrap gap-3">
               {EXPERIENCES.map((item, i) => (
                 <Reveal as="li" key={item} delay={i * 50}>
-                  <div className="flex items-baseline justify-between gap-6 border-b border-border py-6">
-                    <span className="font-serif text-[clamp(1.6rem,3vw,2.4rem)]">{item}</span>
-                    <span className="text-[0.66rem] tracking-[0.2em] text-muted-foreground">
+                  <div className="group flex items-center gap-4 rounded-full border border-border bg-card px-6 py-4 transition-all duration-400 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_45px_-38px_rgba(0,48,80,0.9)]">
+                    <span className="text-[0.66rem] font-semibold tracking-[0.16em] text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
+                    <span className="text-[clamp(1.05rem,2vw,1.5rem)] font-medium">{item}</span>
                   </div>
                 </Reveal>
               ))}
@@ -303,7 +309,7 @@ function HomePage() {
       </section>
 
       {/* WHY US */}
-      <section className="bg-[var(--sand-deep)]">
+      <section className="mx-auto max-w-[1600px] rounded-[2.5rem] bg-[var(--sand-deep)] sm:mx-5 lg:rounded-[3rem]">
         <div className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
           <SectionHeading
             title={
@@ -317,8 +323,15 @@ function HomePage() {
           <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {BENEFITS.map((benefit, i) => (
               <Reveal key={benefit.title} delay={i * 80}>
-                <h3 className="font-serif text-xl">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p>
+                <div className="float-card h-full p-7">
+                  <span className="grid size-11 place-items-center rounded-full bg-accent/10 text-sm font-semibold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-5 text-lg font-semibold">{benefit.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {benefit.text}
+                  </p>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -326,7 +339,7 @@ function HomePage() {
       </section>
 
       {/* PRIVATE CHARTER */}
-      <section className="relative min-h-[80vh] overflow-hidden">
+      <section className="relative mx-auto min-h-[80vh] max-w-[1600px] overflow-hidden rounded-[2.5rem] sm:mx-5 lg:rounded-[3rem]">
         <img
           src="/images/charter-sunset.jpg"
           alt="Luxury Phinisi boat at sunset"
@@ -346,7 +359,7 @@ function HomePage() {
             </p>
             <Link
               to="/private-charter"
-              className="mt-10 inline-block border border-[var(--sand)]/70 px-9 py-4 text-[0.7rem] tracking-[0.2em] text-[var(--sand)] uppercase transition-colors hover:bg-[var(--sand)] hover:text-foreground"
+              className="btn-glass mt-10"
             >
               Explore Private Charter
             </Link>
@@ -373,14 +386,14 @@ function HomePage() {
       </section>
 
       {/* JOURNAL */}
-      <section className="bg-[var(--sand-deep)]">
+      <section className="mx-auto max-w-[1600px] rounded-[2.5rem] bg-[var(--sand-deep)] sm:mx-5 lg:rounded-[3rem]">
         <div className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <SectionHeading eyebrow="From the Journal" title="Stories From the Archipelago" />
             <Reveal>
               <Link
                 to="/articles"
-                className="text-[0.7rem] tracking-[0.2em] uppercase underline-offset-8 hover:underline"
+                className="btn-outline !py-3 !text-[0.8rem]"
               >
                 Explore Journal
               </Link>
