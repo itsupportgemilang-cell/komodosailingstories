@@ -74,7 +74,8 @@ function DestinationDetail() {
 
   return (
     <>
-      <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[70vh] min-h-[420px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src={destination.featured_image ?? "/images/padar.jpg"}
           alt={destination.name}

@@ -103,7 +103,8 @@ function PackageDetail() {
 
   return (
     <>
-      <section className="relative h-[78vh] min-h-[460px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[78vh] min-h-[460px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src={pkg.featured_image ?? "/images/hero-phinisi.jpg"}
           alt={pkg.title}

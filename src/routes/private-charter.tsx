@@ -25,7 +25,8 @@ export const Route = createFileRoute("/private-charter")({
 function PrivateCharter() {
   return (
     <>
-      <section className="relative h-[92vh] min-h-[540px] overflow-hidden">
+      <section className="px-3 pt-20 sm:px-5">
+        <div className="relative mx-auto h-[92vh] min-h-[540px] max-w-[1600px] overflow-hidden rounded-[2.5rem] lg:rounded-[3rem]">
         <img
           src="/images/charter-sunset.jpg"
           alt="A traditional Phinisi anchored at sunset in Komodo"
