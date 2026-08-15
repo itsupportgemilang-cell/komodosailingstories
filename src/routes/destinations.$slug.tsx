@@ -88,12 +88,13 @@ function DestinationDetail() {
             {destination.name}
           </h1>
         </div>
+        </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-24 lg:py-32">
         <Reveal>
           {destination.short_description ? (
-            <p className="font-serif text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45]">
+            <p className="text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.45] font-light">
               {destination.short_description}
             </p>
           ) : null}

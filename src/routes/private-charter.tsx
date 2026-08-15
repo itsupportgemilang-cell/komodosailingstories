@@ -44,10 +44,11 @@ function PrivateCharter() {
           </p>
           <a
             href="#inquiry"
-            className="mt-10 inline-block w-fit border border-[var(--sand)]/70 px-10 py-4 text-[0.7rem] tracking-[0.2em] text-[var(--sand)] uppercase transition-colors hover:bg-[var(--sand)] hover:text-foreground"
+            className="btn-primary mt-10 w-fit"
           >
             Start The Conversation
           </a>
+        </div>
         </div>
       </section>
 
@@ -56,7 +57,7 @@ function PrivateCharter() {
           <p className="eyebrow text-accent">Why Charter</p>
         </Reveal>
         <Reveal className="lg:col-span-7" delay={80}>
-          <p className="font-serif text-[clamp(1.6rem,3vw,2.6rem)] leading-[1.35]">
+          <p className="text-[clamp(1.6rem,3vw,2.6rem)] leading-[1.35] font-light">
             A charter is less about exclusivity and more about pace. You wake when you wake, swim
             when the light is right, and stay a second night at the anchorage nobody wants to leave.
           </p>
@@ -68,7 +69,7 @@ function PrivateCharter() {
               ["Celebrations", "Birthdays, proposals, quiet anniversaries."],
             ].map(([t, d]) => (
               <div key={t} className="border-t border-border pt-5">
-                <h3 className="font-serif text-xl">{t}</h3>
+                <h3 className="text-lg font-semibold">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
               </div>
             ))}
@@ -82,8 +83,8 @@ function PrivateCharter() {
           <div className="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((step, i) => (
               <Reveal key={step.n} delay={i * 90}>
-                <p className="font-serif text-4xl text-accent">{step.n}</p>
-                <h3 className="mt-5 font-serif text-2xl">{step.t}</h3>
+                <p className="grid size-14 place-items-center rounded-full bg-accent/10 text-2xl font-semibold text-accent">{step.n}</p>
+                <h3 className="mt-5 text-xl font-semibold">{step.t}</h3>
                 <p className="mt-3 text-sm leading-[1.8] text-muted-foreground">{step.d}</p>
               </Reveal>
             ))}

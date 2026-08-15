@@ -77,7 +77,7 @@ function ResetPasswordPage() {
     <div className="flex min-h-[80vh] items-center justify-center px-6 py-24">
       <div className="w-full max-w-md">
         <p className="eyebrow text-muted-foreground">Komodo Tropical Cruise</p>
-        <h1 className="mt-3 font-serif text-4xl">Set a new password</h1>
+        <h1 className="mt-3 text-4xl font-medium">Set a new password</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Choose a new password for your studio account.
         </p>
