@@ -165,7 +165,7 @@
   h4,
   blockquote {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: -0.025em;
   }
 
@@ -184,7 +184,7 @@
 
 @utility display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.03em;
 }
@@ -266,6 +266,73 @@
   &:hover {
     background: rgb(255 255 255 / 0.2);
     transform: translateY(-2px);
+  }
+}
+
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--sea) 28%, transparent);
+  background: color-mix(in oklab, var(--sea) 6%, #fff);
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+}
+
+@utility pill-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(255 255 255 / 0.16);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+}
+
+@utility circle-btn {
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--sea) 30%, transparent);
+  color: var(--sea);
+  background: #fff;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    background: var(--sea);
+    border-color: var(--sea);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+}
+
+@utility float-card {
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
+  border-radius: 2rem;
+  box-shadow: 0 24px 60px -44px color-mix(in oklab, var(--ink) 60%, transparent);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 34px 70px -46px color-mix(in oklab, var(--ink) 65%, transparent);
   }
 }
 

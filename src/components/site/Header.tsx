@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -15,10 +15,9 @@ export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const overlay = pathname === "/" || pathname === "/private-charter";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -28,65 +27,62 @@ export function Header() {
     setOpen(false);
   }, [pathname]);
 
-  const solid = scrolled || !overlay;
-
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        solid
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-[0_1px_30px_-20px_rgba(0,0,0,0.5)]"
-          : "bg-transparent",
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5">
       <div
         className={cn(
-          "mx-auto flex max-w-[1400px] items-center justify-between px-6 transition-all duration-500 lg:px-10",
-          solid ? "h-16" : "h-24",
+          "mx-auto flex max-w-[1320px] items-center justify-between gap-4 rounded-full border px-3 py-2.5 transition-all duration-500 sm:px-4",
+          scrolled || open
+            ? "border-border/70 bg-white/85 shadow-[0_18px_50px_-40px_rgba(0,48,80,0.8)] backdrop-blur-xl"
+            : "border-white/25 bg-white/10 backdrop-blur-md",
         )}
       >
         <Link
           to="/"
           aria-label="Komodo Tropical Cruise home"
           className={cn(
-            "leading-[1.05] transition-colors duration-500",
-            solid ? "text-foreground" : "text-background",
+            "pl-3 leading-[1.05] transition-colors duration-500",
+            scrolled || open ? "text-foreground" : "text-white",
           )}
         >
-          <span className="block text-[0.8rem] font-semibold tracking-[0.32em]">KOMODO</span>
-          <span className="block text-[0.55rem] tracking-[0.42em] opacity-70">
+          <span className="block text-[0.82rem] font-semibold tracking-[0.26em]">KOMODO</span>
+          <span className="block text-[0.53rem] tracking-[0.34em] opacity-70">
             TROPICAL CRUISE
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-9 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={cn(
-                "text-[0.78rem] tracking-[0.08em] transition-colors duration-300 hover:opacity-60",
-                solid ? "text-foreground" : "text-background",
-              )}
-              activeProps={{ className: "underline underline-offset-8 decoration-1" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+          {NAV.map((item) => {
+            const active = pathname.startsWith(item.to);
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={cn(
+                  "rounded-full px-4 py-2 text-[0.82rem] font-medium transition-all duration-300",
+                  scrolled || open ? "text-foreground" : "text-white",
+                  active
+                    ? scrolled
+                      ? "border border-accent/40 bg-accent/8 text-accent"
+                      : "border border-white/60 bg-white/15"
+                    : "border border-transparent hover:bg-white/15",
+                  scrolled && !active ? "hover:bg-accent/8 hover:text-accent" : "",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link
             to="/private-charter"
             hash="inquiry"
-            className={cn(
-              "hidden border px-6 py-3 text-[0.7rem] tracking-[0.18em] uppercase transition-colors duration-300 lg:inline-block",
-              solid
-                ? "border-foreground text-foreground hover:bg-foreground hover:text-background"
-                : "border-background/70 text-background hover:bg-background hover:text-foreground",
-            )}
+            className="btn-primary hidden !px-6 !py-2.5 !text-[0.82rem] lg:inline-flex"
           >
             Book Your Journey
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
           <button
             type="button"
@@ -94,8 +90,10 @@ export function Header() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             className={cn(
-              "-mr-2 p-2 transition-colors lg:hidden",
-              solid || open ? "text-foreground" : "text-background",
+              "grid size-11 place-items-center rounded-full border transition-colors lg:hidden",
+              scrolled || open
+                ? "border-border text-foreground"
+                : "border-white/40 bg-white/10 text-white",
             )}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -105,26 +103,23 @@ export function Header() {
 
       <div
         className={cn(
-          "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 lg:hidden",
-          open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0",
+          "mx-auto mt-2 max-w-[1320px] overflow-hidden rounded-[2rem] border border-border/70 bg-white/95 shadow-[0_24px_60px_-45px_rgba(0,48,80,0.9)] backdrop-blur-xl transition-all duration-500 lg:hidden",
+          open ? "max-h-[560px] opacity-100" : "pointer-events-none max-h-0 border-transparent opacity-0",
         )}
       >
-        <nav aria-label="Mobile" className="flex flex-col px-6 py-6">
+        <nav aria-label="Mobile" className="flex flex-col p-4">
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="border-b border-border/60 py-4 font-serif text-2xl"
+              className="rounded-full px-5 py-3.5 text-lg font-medium transition-colors hover:bg-accent/8 hover:text-accent"
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/private-charter"
-            hash="inquiry"
-            className="mt-6 bg-foreground px-6 py-4 text-center text-[0.7rem] tracking-[0.18em] text-background uppercase"
-          >
+          <Link to="/private-charter" hash="inquiry" className="btn-primary mt-3 w-full">
             Book Your Journey
+            <ArrowUpRight className="size-4" />
           </Link>
         </nav>
       </div>
